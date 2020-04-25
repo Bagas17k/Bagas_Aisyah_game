@@ -15,17 +15,14 @@ let mistakes = 0;
 let wordStatus = null;
 let level = 1;
 
-randomIndex = Math.floor(Math.random() * listAnswer.length);
 
 function generateQuestion() {
+    randomIndex = Math.floor(Math.random() * listAnswer.length);
     questions = question[randomIndex]
     document.getElementById('question').innerHTML = questions
-}
-
-function randomAnswer() {
     playerAnswer = listAnswer[randomIndex]
-
 }
+
 
 function generateButtons() {
     let buttonsHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter =>
@@ -83,14 +80,14 @@ function updateMistakes() {
 document.getElementById('maxWrong').innerHTML = maxWrong;
 document.getElementById('level').innerHTML = `Level : ${level}`;
 
-// function nextLevel() {
-//     for (let level = 0; level < question.length; level++) {
-//         generateQuestion();
-//         randomAnswer();
-//         guessedWord();
-//     }
-//     generateButtons();
-// }
+function nextLevel() {
+    for (let level = 0; level < question.length; level++) {
+        generateQuestion();
+        // randomAnswer();
+        guessedWord();
+    }
+    generateButtons();
+}
 
 function updateMistakes() {
     document.getElementById('mistakes').innerHTML = mistakes;
@@ -101,10 +98,15 @@ function reset() {
     guessed = [];
     // document.getElementById('hangmanPic').src = './images/0.jpg';
     generateQuestion();
-    randomAnswer();
     guessedWord();
     updateMistakes();
     generateButtons();
+}
+
+function endGame(){
+    document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
+    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+    alert('YOU LOSE STUPID!!!')
 }
 
 // function shuffle(deck) {
@@ -118,8 +120,7 @@ function reset() {
 //     }
 // }
 
-generateQuestion();
-randomAnswer();
-guessedWord();
-generateButtons();
-// nextLevel();
+// generateQuestion();
+// guessedWord();
+// generateButtons();
+nextLevel();
