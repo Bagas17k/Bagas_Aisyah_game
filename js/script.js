@@ -1,11 +1,15 @@
 let listAnswer = [
     'SHOLEH',
-    'AJI'
+    'AJI',
+    'ROMLI',
+    'ANDRE'
 ]
 
 let question = [
     'Anak ekspresif?',
-    'Anak insecure?'
+    'Anak insecure?',
+    'Seksi konsumsi?',
+    'Delemuzz?'
 ]
 
 let playerAnswer = '';
@@ -28,7 +32,7 @@ function generateButtons() {
     let buttonsHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter =>
         `
       <button
-        class="btn btn-lg btn-primary m-2"
+        class="btn-keyboard m-2"
         id='` + letter + `'
         onClick="handleGuess('` + letter + `')"
       >
@@ -46,7 +50,8 @@ function handleGuess(chosenLetter) {
 
     if (playerAnswer.indexOf(chosenLetter) >= 0) {
         guessedWord();
-        checkIfGameWon();
+        nextLevel();
+        // checkIfGameWon();
     } else if (playerAnswer.indexOf(chosenLetter) === -1) {
         mistakes++;
         updateMistakes();
@@ -55,16 +60,21 @@ function handleGuess(chosenLetter) {
     }
 }
 
-function checkIfGameWon() {
-    if (wordStatus === playerAnswer) {
-        document.getElementById('keyboard').innerHTML = 'You Won!!!';
-    }
+function updateHangmanPicture() {
+    document.getElementById('hangmanPic').src = './asset/' + mistakes + '.png';
 }
+
+// function checkIfGameWon() {
+//     if (wordStatus === playerAnswer) {
+//         document.getElementById('keyboard').innerHTML = 'You Won!!!';
+//     }
+// }
 
 function checkIfGameLost() {
     if (mistakes === maxWrong) {
         document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
         document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+        // alert('YOU LOSE STUPID!!!')
     }
 }
 
@@ -80,11 +90,16 @@ function updateMistakes() {
 document.getElementById('maxWrong').innerHTML = maxWrong;
 document.getElementById('level').innerHTML = `Level : ${level}`;
 
+
 function nextLevel() {
-    for (let level = 0; level < question.length; level++) {
-        generateQuestion();
-        // randomAnswer();
-        guessedWord();
+    for (let level = 1; level < question.length; level++) {
+        if (wordStatus === playerAnswer) {
+            generateQuestion();
+            guessedWord();
+            handleGuess();
+        } else {
+            checkIfGameLost();
+        }
     }
     generateButtons();
 }
@@ -96,31 +111,35 @@ function updateMistakes() {
 function reset() {
     mistakes = 0;
     guessed = [];
-    // document.getElementById('hangmanPic').src = './images/0.jpg';
+    document.getElementById('hangmanPic').src = './asset/0.png';
     generateQuestion();
     guessedWord();
     updateMistakes();
     generateButtons();
 }
 
-function endGame(){
+function endGame() {
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
     document.getElementById('keyboard').innerHTML = 'You Lost!!!';
     alert('YOU LOSE STUPID!!!')
 }
 
-// function shuffle(deck) {
-//     for (var i = 0; i < 1000; i++) {
-//         var location1 = Math.floor((Math.random() * deck.length));
-//         var location2 = Math.floor((Math.random() * deck.length));
-//         var tmp = deck[location1];
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function() {
+        this.sound.play();
+    }
+    this.stop = function() {
+        this.sound.pause();
+    }
+}
 
-//         deck[location1] = deck[location2];
-//         deck[location2] = tmp;
-//     }
-// }
-
-// generateQuestion();
-// guessedWord();
+generateQuestion();
+guessedWord();
 // generateButtons();
 nextLevel();

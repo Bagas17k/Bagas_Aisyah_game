@@ -7,37 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Bootstrap 4 CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="./css/style.css">
     <title>HangMentee</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="text-center">HangMentee</h1>
-        <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div><br>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="text-center">
-                    <h3 id="level">Level : 1</h3>
-                    <img id='hangmanPic' src="./asset/photo_2020-04-25_13-19-34.jpg" style="width: 80%;" alt="">
-                    <button class="btn btn-play-again" onclick="reset()">Play again</button>
-                    <button class="btn btn-end-game" onclick="endGame()">End game</button>
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="text-center">
-                    <p id="question"></p>
-                    <p id="wordSpotlight">The word to be guessed goes here</p>
-                    <div id="keyboard"></div>
-                </div>
+    <section class="background">
+        <h1>HangMentee</h1>
+        <div class="game-health">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div><br>
+        </div>
+        <div class="left-body">
+            <div class="content-left-body">
+                <h3 id="level">Level : 1</h3>
+                <img id='hangmanPic' src="./asset/0.png" style="width: 100%;" alt="">
+                <button class="btn-option-menu" onclick="reset()">Play again</button>
+                <button class="btn-option-menu" onclick="endGame()">End game</button>
             </div>
         </div>
-    </div>
+        <div class="right-body">
+            <div class="content-right-body">
+                <p id="question"></p>
+                <p id="wordSpotlight">The word to be guessed goes here</p>
+                <div id="keyboard"></div>
+            </div>
+        </div>
+        </div>
+        </div>
 
-    <script src='./js/script.js'></script>
+        <script src='./js/script.js'></script>
+    </section>
 </body>
 
 </html>
