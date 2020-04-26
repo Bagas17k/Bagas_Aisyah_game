@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-health {
+    text-align: right;
+    margin-right: 100px;
+}
+
+.left-body {
+    text-align: left;
+    margin-left: 100px;
+}
+
+.btn-option-menu {
+    text-align: left;
+    display: inline;
+}
+
+.btn-keyboard {
+    color: black;
+    background-color: plum;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+    /* display: -ms-flexbox; */
+}
+
+.btn-option-menu {
+    color: black;
+    background-color: grey;
+    padding: 15px;
+}
+
+#hangmanPic {
+    align-content: center;
+}
+
+body {
+    background-color: peru;
+}
