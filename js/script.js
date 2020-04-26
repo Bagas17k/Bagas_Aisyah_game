@@ -1,15 +1,35 @@
 let listAnswer = [
-    'SHOLEH',
-    'AJI',
+    'AJAY',
+    'SYAHKUN',
+    'XMUSH',
+    'YASIN',
+    'ALUL',
+    'ANDREFAJAR',
+    'SHOFI',
+    'DERBY',
+    'AGUS',
+    'BAGAS',
     'ROMLI',
-    'ANDRE'
+    'ANDRENOVADO',
+    'ROSLIANI',
+    'YOPI'
 ]
 
 let question = [
-    'Anak ekspresif?',
-    'Anak insecure?',
-    'Seksi konsumsi?',
-    'Delemuzz?'
+    "SIAPA MENTEE HATI-HATI BOY?",
+    "DIA MAKAN MIE INSTAN 4 KALI DALAM SATU MALAM?",
+    "NAMA WARNET ALTA BATCH 5?",
+    "SHE'S GONE?",
+    "DALGONA COFFEE MAKER?",
+    "KURMA EATER?",
+    "KUTUKAN KEKALAHAN UNO DIPELOPORI OLEH?",
+    "WHO CARES ABOUT THAT ADALAH SLOGANNYA",
+    "BERSAMA-SAMA BERCANDA LAGI?",
+    "KALAU DIA BICARA SEPERTI TIDAK ADA REM",
+    "DIA ADALAH KEPALA BIDANG KEROHANIAN",
+    "DE LIMOGES A.K.A DELEMUZZHH",
+    "KALAU DIPANGGIL MAS KOBAR AUTO KAGET?",
+    "PALING JARANG MANDI?",
 ]
 
 let playerAnswer = '';
@@ -18,9 +38,11 @@ let maxWrong = 5;
 let mistakes = 0;
 let wordStatus = null;
 let level = 1;
-
+let win = 0;
 
 function generateQuestion() {
+    let backgroundMusic = new Audio('sound/music.mp3')
+    backgroundMusic.play();
     randomIndex = Math.floor(Math.random() * listAnswer.length);
     questions = question[randomIndex]
     document.getElementById('question').innerHTML = questions
@@ -28,8 +50,8 @@ function generateQuestion() {
 }
 
 
-function generateButtons() {
-    let buttonsHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter =>
+function generateButtons1() {
+    let buttonsHTML = 'ABCDEFGHI'.split('').map(letter =>
         `
       <button
         class="btn-keyboard m-2"
@@ -40,18 +62,47 @@ function generateButtons() {
       </button>
     `).join('');
 
-    document.getElementById('keyboard').innerHTML = buttonsHTML;
+    document.getElementById('keyboard1').innerHTML = buttonsHTML;
+}
+
+function generateButtons2() {
+    let buttonsHTML = 'JKLMNOPQR'.split('').map(letter =>
+        `
+      <button
+        class="btn-keyboard m-2"
+        id='` + letter + `'
+        onClick="handleGuess('` + letter + `')"
+      >
+        ` + letter + `
+      </button>
+    `).join('');
+
+    document.getElementById('keyboard2').innerHTML = buttonsHTML;
+}
+
+function generateButtons3() {
+    let buttonsHTML = 'STUVWXYZ'.split('').map(letter =>
+        `
+      <button
+        class="btn-keyboard m-2"
+        id='` + letter + `'
+        onClick="handleGuess('` + letter + `')"
+      >
+        ` + letter + `
+      </button>
+    `).join('');
+
+    document.getElementById('keyboard3').innerHTML = buttonsHTML;
 }
 
 
 function handleGuess(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
     document.getElementById(chosenLetter).setAttribute('disabled', true);
-
     if (playerAnswer.indexOf(chosenLetter) >= 0) {
+        // win++
         guessedWord();
-        nextLevel();
-        // checkIfGameWon();
+        checkIfGameWon();
     } else if (playerAnswer.indexOf(chosenLetter) === -1) {
         mistakes++;
         updateMistakes();
@@ -62,19 +113,25 @@ function handleGuess(chosenLetter) {
 
 function updateHangmanPicture() {
     document.getElementById('hangmanPic').src = './asset/' + mistakes + '.png';
+    soundMistake();
 }
 
-// function checkIfGameWon() {
-//     if (wordStatus === playerAnswer) {
-//         document.getElementById('keyboard').innerHTML = 'You Won!!!';
-//     }
-// }
+
+function checkIfGameWon() {
+    if (win === 3) {
+        document.getElementById('keyboard1').innerHTML = 'CONGRATULATIONS';
+        document.getElementById('keyboard2').innerHTML = 'You Won';
+        document.getElementById('keyboard3').innerHTML = 'The Game!!!';
+    }
+}
 
 function checkIfGameLost() {
     if (mistakes === maxWrong) {
         document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
-        document.getElementById('keyboard').innerHTML = 'You Lost!!!';
-        // alert('YOU LOSE STUPID!!!')
+        document.getElementById('keyboard1').innerHTML = 'OOPS';
+        document.getElementById('keyboard2').innerHTML = 'You Lose';
+        document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
+        alert('YOU LOSE STUPID!!!')
     }
 }
 
@@ -90,18 +147,23 @@ function updateMistakes() {
 document.getElementById('maxWrong').innerHTML = maxWrong;
 document.getElementById('level').innerHTML = `Level : ${level}`;
 
-
-function nextLevel() {
-    for (let level = 1; level < question.length; level++) {
-        if (wordStatus === playerAnswer) {
-            generateQuestion();
-            guessedWord();
-            handleGuess();
-        } else {
-            checkIfGameLost();
-        }
+function soundMistake() {
+    if (mistakes === 1) {
+        let mstSound = new Audio('sound/ohno.mp3')
+        mstSound.play()
+    } else if (mistakes === 2) {
+        let mstSound = new Audio('sound/ohno.mp3')
+        mstSound.play()
+    } else if (mistakes === 3) {
+        let mstSound = new Audio('sound/ohno.mp3')
+        mstSound.play()
+    } else if (mistakes === 4) {
+        let mstSound = new Audio('sound/ohno.mp3')
+        mstSound.play()
+    } else if (mistakes === 5) {
+        let mstSound = new Audio('sound/scream.mp3')
+        mstSound.play()
     }
-    generateButtons();
 }
 
 function updateMistakes() {
@@ -111,35 +173,26 @@ function updateMistakes() {
 function reset() {
     mistakes = 0;
     guessed = [];
+    win++
     document.getElementById('hangmanPic').src = './asset/0.png';
     generateQuestion();
     guessedWord();
     updateMistakes();
-    generateButtons();
+    generateButtons1();
+    generateButtons2();
+    generateButtons3();
 }
 
 function endGame() {
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
-    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+    document.getElementById('keyboard1').innerHTML = 'OOPS';
+    document.getElementById('keyboard2').innerHTML = 'You Lose';
+    document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
     alert('YOU LOSE STUPID!!!')
-}
-
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function() {
-        this.sound.play();
-    }
-    this.stop = function() {
-        this.sound.pause();
-    }
 }
 
 generateQuestion();
 guessedWord();
-// generateButtons();
-nextLevel();
+generateButtons1();
+generateButtons2();
+generateButtons3();
