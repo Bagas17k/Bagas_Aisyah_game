@@ -17,13 +17,13 @@ let listAnswer = [
 
 let question = [
     "SIAPA MENTEE HATI-HATI BOY?",
-    "DIA MAKAN MIE INSTAN 4 KALI DALAM SATU MALAM?",
+    "DIA MAKAN MIE INSTAN 4 KALI DALAM SATU MALAM",
     "NAMA WARNET ALTA BATCH 5?",
     "SHE'S GONE?",
     "DALGONA COFFEE MAKER?",
     "KURMA EATER?",
     "KUTUKAN KEKALAHAN UNO DIPELOPORI OLEH?",
-    "WHO CARES ABOUT THAT ADALAH SLOGANNYA",
+    "WHO CARES ABOUT THAT ADALAH SLOGANNYA?",
     "BERSAMA-SAMA BERCANDA LAGI?",
     "KALAU DIA BICARA SEPERTI TIDAK ADA REM",
     "DIA ADALAH KEPALA BIDANG KEROHANIAN",
@@ -38,17 +38,14 @@ let maxWrong = 5;
 let mistakes = 0;
 let wordStatus = null;
 let level = 1;
-let win = 0;
+// let win = 0;
 
 function generateQuestion() {
-    // let backgroundMusic = new Audio('sound/music.mp3')
-    // backgroundMusic.play();
     randomIndex = Math.floor(Math.random() * listAnswer.length);
     questions = question[randomIndex]
     document.getElementById('question').innerHTML = questions
     playerAnswer = listAnswer[randomIndex]
 }
-
 
 function generateButtons1() {
     let buttonsHTML = 'ABCDEFGHI'.split('').map(letter =>
@@ -95,12 +92,10 @@ function generateButtons3() {
     document.getElementById('keyboard3').innerHTML = buttonsHTML;
 }
 
-
 function handleGuess(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
     document.getElementById(chosenLetter).setAttribute('disabled', true);
     if (playerAnswer.indexOf(chosenLetter) >= 0) {
-        // win++
         guessedWord();
         checkIfGameWon();
     } else if (playerAnswer.indexOf(chosenLetter) === -1) {
@@ -111,41 +106,15 @@ function handleGuess(chosenLetter) {
     }
 }
 
-function updateHangmanPicture() {
-    document.getElementById('hangmanPic').src = './asset/' + mistakes + '.png';
-    soundMistake();
-}
-
-
-function checkIfGameWon() {
-    if (win === 3) {
-        document.getElementById('keyboard1').innerHTML = 'CONGRATULATIONS';
-        document.getElementById('keyboard2').innerHTML = 'You Won';
-        document.getElementById('keyboard3').innerHTML = 'The Game!!!';
-    }
-}
-
-function checkIfGameLost() {
-    if (mistakes === maxWrong) {
-        document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
-        document.getElementById('keyboard1').innerHTML = 'OOPS';
-        document.getElementById('keyboard2').innerHTML = 'You Lose';
-        document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
-        alert('YOU LOSE STUPID!!!')
-    }
-}
+// function updateHangmanPicture() {
+//     document.getElementById('hangmanPic').src = './asset/' + mistakes + '.png';
+//     soundMistake();
+// }
 
 function guessedWord() {
     wordStatus = playerAnswer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     document.getElementById('wordSpotlight').innerHTML = wordStatus
 }
-
-function updateMistakes() {
-    document.getElementById('mistakes').innerHTML = mistakes;
-}
-
-document.getElementById('maxWrong').innerHTML = maxWrong;
-document.getElementById('level').innerHTML = `Level : ${level}`;
 
 function soundMistake() {
     if (mistakes === 1) {
@@ -168,6 +137,28 @@ function soundMistake() {
 
 function updateMistakes() {
     document.getElementById('mistakes').innerHTML = mistakes;
+    soundMistake();
+}
+
+function checkIfGameWon() {
+    if (wordStatus == playerAnswer) {
+        document.getElementById('keyboard1').innerHTML = 'CONGRATULATIONS';
+        document.getElementById('keyboard2').innerHTML = 'You Won';
+        document.getElementById('keyboard3').innerHTML = 'The Game!!!';
+    }
+}
+
+document.getElementById('maxWrong').innerHTML = maxWrong;
+
+function checkIfGameLost() {
+    if (mistakes === maxWrong) {
+
+        document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
+        document.getElementById('keyboard1').innerHTML = 'OOPS';
+        document.getElementById('keyboard2').innerHTML = 'You Lose';
+        document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
+        alert('YOU LOSE STUPID!!!')
+    }
 }
 
 function reset() {
