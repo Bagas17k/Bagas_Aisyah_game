@@ -34,7 +34,7 @@ let question = [
 
 let playerAnswer = '';
 let guessed = [];
-let maxWrong = 5;
+let maxWrong = 6;
 let mistakes = 0;
 let wordStatus = null;
 let level = 1;
@@ -106,10 +106,9 @@ function handleGuess(chosenLetter) {
     }
 }
 
-// function updateHangmanPicture() {
-//     document.getElementById('hangmanPic').src = './asset/' + mistakes + '.png';
-//     soundMistake();
-// }
+function updateHangmanPicture() {
+    document.getElementById('hangman-pic').src = './asset/' + mistakes + '.jpg';
+}
 
 function guessedWord() {
     wordStatus = playerAnswer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
@@ -130,6 +129,9 @@ function soundMistake() {
         let mstSound = new Audio('sound/ohno.mp3')
         mstSound.play()
     } else if (mistakes === 5) {
+        let mstSound = new Audio('sound/ohno.mp3')
+        mstSound.play()
+    } else if (mistakes === 6) {
         let mstSound = new Audio('sound/scream.mp3')
         mstSound.play()
     }
@@ -152,12 +154,12 @@ document.getElementById('maxWrong').innerHTML = maxWrong;
 
 function checkIfGameLost() {
     if (mistakes === maxWrong) {
-
+        document.getElementById('gameover').style.display = "block";
+        document.getElementById('gameover').style.display = "block";
         document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
         document.getElementById('keyboard1').innerHTML = 'OOPS';
         document.getElementById('keyboard2').innerHTML = 'You Lose';
         document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
-        alert('YOU LOSE STUPID!!!')
     }
 }
 
@@ -175,11 +177,11 @@ function reset() {
 }
 
 function endGame() {
+    document.getElementById('gameover').style.display = "block";
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
     document.getElementById('keyboard1').innerHTML = 'OOPS';
     document.getElementById('keyboard2').innerHTML = 'You Lose';
     document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
-    alert('YOU LOSE STUPID!!!')
 }
 
 generateQuestion();
