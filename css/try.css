@@ -1,0 +1,102 @@
+#background-img {
+    background-image: url('../sand.jpeg');
+    background-size: cover;
+    position: relative;
+    /* height: 100vh; */
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    animation: animate 20s linear infinite;
+}
+
+.cloud {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+}
+
+@keyframes animate {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+.game-area {
+    margin: 0px 200px 0px 200px;
+    background-color: transparent;
+    opacity: 90%;
+    border-radius: 30px;
+    /* border: 10px solid #b59231; */
+}
+
+.top-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+hr {
+    color: white;
+}
+
+h3 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+.btn-keyboard {
+    color: #3b3935;
+    background-color: lightblue;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.keyboard-position {
+    text-align: center;
+    margin-right: 30px;
+    padding-bottom: 20px;
+}
+
+.hangman-pic {
+    display: block;
+    margin-left: 40px;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.game-health {
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.btn-menu {
+    margin-left: 40px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-option-menu {
+    color: #3b3935;
+    background-color: lightblue;
+    border-color: lightgrey;
+    box-shadow: transparent;
+    padding: 13px 20px 13px 20px;
+    margin-top: 5px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
