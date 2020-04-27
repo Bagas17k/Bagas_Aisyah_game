@@ -120,13 +120,13 @@ function soundMistake() {
         let mstSound = new Audio('sound/ohno.mp3')
         mstSound.play()
     } else if (mistakes === 2) {
-        let mstSound = new Audio('sound/ohno.mp3')
+        let mstSound = new Audio('sound/again.mp3')
         mstSound.play()
     } else if (mistakes === 3) {
         let mstSound = new Audio('sound/ohno.mp3')
         mstSound.play()
     } else if (mistakes === 4) {
-        let mstSound = new Audio('sound/ohno.mp3')
+        let mstSound = new Audio('sound/didyou.mp3')
         mstSound.play()
     } else if (mistakes === 5) {
         let mstSound = new Audio('sound/ohno.mp3')
