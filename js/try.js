@@ -1,20 +1,4 @@
-let listAnswer = [
-    'AJAY',
-    'SYAHKUN',
-    'XMUSH',
-    'YASIN',
-    'ALUL',
-    'ANDREFAJAR',
-    'SHOFI',
-    'DERBY',
-    'AGUS',
-    'BAGAS',
-    'ROMLI',
-    'ANDRENOVADO',
-    'ROSLIANI',
-    'YOPI'
-]
-
+// Question list
 let question = [
     "SIAPA MENTEE HATI-HATI BOY?",
     "DIA MAKAN MIE INSTAN 4 KALI DALAM SATU MALAM",
@@ -32,14 +16,31 @@ let question = [
     "PALING JARANG MANDI?",
 ]
 
+// Answer list
+let listAnswer = [
+    'AJAY',
+    'SYAHKUN',
+    'XMUSH',
+    'YASIN',
+    'ALUL',
+    'ANDREFAJAR',
+    'SHOFI',
+    'DERBY',
+    'AGUS',
+    'BAGAS',
+    'ROMLI',
+    'ANDRENOVADO',
+    'ROSLIANI',
+    'YOPI'
+]
+
 let playerAnswer = '';
 let guessed = [];
 let maxWrong = 6;
 let mistakes = 0;
 let wordStatus = null;
-let level = 1;
 
-
+// Random Question and Answer
 function generateQuestion() {
     randomIndex = Math.floor(Math.random() * listAnswer.length);
     questions = question[randomIndex]
@@ -47,6 +48,7 @@ function generateQuestion() {
     playerAnswer = listAnswer[randomIndex]
 }
 
+// Generate Keyboard
 function generateButtons1() {
     let buttonsHTML = 'ABCDEFGHI'.split('').map(letter =>
         `
@@ -61,6 +63,7 @@ function generateButtons1() {
     document.getElementById('keyboard1').innerHTML = buttonsHTML;
 }
 
+// Generate Keyboard
 function generateButtons2() {
     let buttonsHTML = 'JKLMNOPQR'.split('').map(letter =>
         `
@@ -75,6 +78,7 @@ function generateButtons2() {
     document.getElementById('keyboard2').innerHTML = buttonsHTML;
 }
 
+// Generate Keyboard
 function generateButtons3() {
     let buttonsHTML = 'STUVWXYZ'.split('').map(letter =>
         `
@@ -90,6 +94,13 @@ function generateButtons3() {
     document.getElementById('keyboard3').innerHTML = buttonsHTML;
 }
 
+// Show Chosen Letter
+function guessedWord() {
+    wordStatus = playerAnswer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+    document.getElementById('wordSpotlight').innerHTML = wordStatus
+}
+
+// Check Chosen Letter by Player
 function handleGuess(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
     document.getElementById(chosenLetter).setAttribute('disabled', true);
@@ -106,16 +117,12 @@ function handleGuess(chosenLetter) {
     }
 }
 
+// Update Hangman Picture if player guesses wrong letter
 function updateHangmanPicture() {
     document.getElementById('hangman-pic').src = './asset/' + mistakes + '.jpg';
 }
 
-function guessedWord() {
-    wordStatus = playerAnswer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
-    document.getElementById('wordSpotlight').innerHTML = wordStatus
-}
-
-
+// Play sound when player chooses wrong letter
 function soundMistake() {
     if (mistakes === 1) {
         let mstSound = new Audio('sound/ohno.mp3')
@@ -138,11 +145,13 @@ function soundMistake() {
     }
 }
 
+// Add number of mistakes
 function updateMistakes() {
     document.getElementById('mistakes').innerHTML = mistakes;
     soundMistake();
 }
 
+// Check if player answers the question correctly
 function checkIfGameWon() {
     if (wordStatus == playerAnswer) {
         let winSound = new Audio('sound/win.mp3')
@@ -154,8 +163,10 @@ function checkIfGameWon() {
     }
 }
 
+// Get maximum wrong
 document.getElementById('maxWrong').innerHTML = maxWrong;
 
+// Check if player mistakes equals maximum wrong
 function checkIfGameLost() {
     if (mistakes === maxWrong) {
         document.getElementById('gameover').style.display = "block";
@@ -166,13 +177,13 @@ function checkIfGameLost() {
     }
 }
 
+// Reset the game when Game Over or Win(Play Again) or click Next button
 function reset() {
     mistakes = 0;
     guessed = [];
     document.getElementById('win-game').style.display = "none";
     document.getElementById('gameover').style.display = "none";
     document.getElementById('game-area').style.display = "block";
-    generateQuestion();
     document.getElementById('hangman-pic').src = './asset/0.jpg';
     generateQuestion();
     guessedWord();
@@ -182,6 +193,7 @@ function reset() {
     generateButtons3();
 }
 
+// Display Game Over when player hit End Game button
 function endGame() {
     let mstSound = new Audio('sound/scream.mp3')
     mstSound.play()

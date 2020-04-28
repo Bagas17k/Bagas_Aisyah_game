@@ -1,9 +1,16 @@
-#start-bg {
-    background-image: url('../start.jpg');
+body {
+    /* background-image: url('../start.jpg'); */
     background-size: contain;
     position: relative;
     height: 100vh;
     background-position: 0 0 0 0;
     margin: 0;
-    margin-right: 0em;
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 1360px;
+    height: 585px;
 }
