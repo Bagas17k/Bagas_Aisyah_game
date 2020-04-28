@@ -1,0 +1,167 @@
+#background-img {
+    background-image: url('../images/cowboybg.jpg');
+    background-size: contain;
+    position: relative;
+    height: 100vh;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    animation: animate 30s linear infinite;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes animate {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+#title-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-color: grey;
+}
+
+#game-area {
+    margin: 20px 200px 0px 200px;
+    background-color: #d47d26;
+    border-radius: 30px;
+    opacity: 90%;
+}
+
+.top-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+#hangman-pic {
+    width: 70%;
+    margin-left: 40px;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    color: white;
+}
+
+hr {
+    color: white;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h4 {
+    text-align: center;
+    color: white;
+}
+
+#gameover {
+    position: fixed;
+    display: none;
+    width: fit-content;
+    background-position-x: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+#gameover-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 20px;
+}
+
+#win-game {
+    position: fixed;
+    display: none;
+    background-position-x: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    cursor: pointer;
+}
+
+#win-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    width: 80%;
+}
+
+.btn-keyboard {
+    color: white;
+    background-color: #854505;
+    padding: 10px 20px 10px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.keyboard-position {
+    text-align: center;
+    margin-right: 30px;
+    padding-bottom: 20px;
+}
+
+.hangman-pic {
+    display: block;
+    margin-left: 40px;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.game-health {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-top: 5px;
+    padding: 0;
+    color: white;
+}
+
+.btn-menu {
+    margin-left: 40px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-option-menu {
+    color: white;
+    background-color: #854505;
+    border-color: lightgrey;
+    box-shadow: transparent;
+    padding: 13px 20px 13px 20px;
+    margin-top: 5px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+}
