@@ -9,12 +9,16 @@
 </head>
 
 <body id="background-img">
-    <!-- <img src="cloud.jpg" class="cloud" alt=""> -->
-    <div class="game-area">
-        <div id="gameover">
-            <img id="gameover-img" src="gameover.jpg" style="width: 30%;" alt="">
+    <div id="gameover">
+        <img id="gameover-img" src="./images/gameover.jpg" alt="" onclick="reset()">
+    </div>
+    <div id="game-area">
+        <div id="win-game">
+            <img id="win-img" src="./images/win.jpg" alt="" onclick="reset()">
         </div>
-        <h1>-- HangMentee --</h1>
+        <div>
+            <img id="title-img" src="./images/title.jpg" alt="">
+        </div>
         <div class="top-area">
             <div>
                 <img id="hangman-pic" src="./asset/0.jpg" alt="">
@@ -32,8 +36,8 @@
         </div>
         <hr>
         <div class="btn-menu">
-            <button class="btn-option-menu" onclick="endGame()">END GAME</button>
-            <button class="btn-option-menu" onclick="reset()">NEXT</button>
+            <button id="end-game-btn" class="btn-option-menu" onclick="endGame()">END GAME</button>
+            <button id="next-btn" class="btn-option-menu" onclick="reset()">NEXT</button>
         </div>
 
     </div>
