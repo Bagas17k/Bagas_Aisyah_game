@@ -38,7 +38,7 @@ let maxWrong = 6;
 let mistakes = 0;
 let wordStatus = null;
 let level = 1;
-// let win = 0;
+
 
 function generateQuestion() {
     randomIndex = Math.floor(Math.random() * listAnswer.length);
@@ -58,7 +58,6 @@ function generateButtons1() {
         ` + letter + `
       </button>
     `).join('');
-
     document.getElementById('keyboard1').innerHTML = buttonsHTML;
 }
 
@@ -73,7 +72,6 @@ function generateButtons2() {
         ` + letter + `
       </button>
     `).join('');
-
     document.getElementById('keyboard2').innerHTML = buttonsHTML;
 }
 
@@ -96,6 +94,8 @@ function handleGuess(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
     document.getElementById(chosenLetter).setAttribute('disabled', true);
     if (playerAnswer.indexOf(chosenLetter) >= 0) {
+        let correctSound = new Audio('sound/sonice.mp3')
+        correctSound.play()
         guessedWord();
         checkIfGameWon();
     } else if (playerAnswer.indexOf(chosenLetter) === -1) {
@@ -115,6 +115,7 @@ function guessedWord() {
     document.getElementById('wordSpotlight').innerHTML = wordStatus
 }
 
+
 function soundMistake() {
     if (mistakes === 1) {
         let mstSound = new Audio('sound/ohno.mp3')
@@ -129,7 +130,7 @@ function soundMistake() {
         let mstSound = new Audio('sound/didyou.mp3')
         mstSound.play()
     } else if (mistakes === 5) {
-        let mstSound = new Audio('sound/ohno.mp3')
+        let mstSound = new Audio('sound/gonnadie.mp3')
         mstSound.play()
     } else if (mistakes === 6) {
         let mstSound = new Audio('sound/scream.mp3')
@@ -144,6 +145,9 @@ function updateMistakes() {
 
 function checkIfGameWon() {
     if (wordStatus == playerAnswer) {
+        let winSound = new Audio('sound/win.mp3')
+        winSound.play()
+        document.getElementById('win-game').style.display = "block";
         document.getElementById('keyboard1').innerHTML = 'CONGRATULATIONS';
         document.getElementById('keyboard2').innerHTML = 'You Won';
         document.getElementById('keyboard3').innerHTML = 'The Game!!!';
@@ -155,7 +159,6 @@ document.getElementById('maxWrong').innerHTML = maxWrong;
 function checkIfGameLost() {
     if (mistakes === maxWrong) {
         document.getElementById('gameover').style.display = "block";
-        document.getElementById('gameover').style.display = "block";
         document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
         document.getElementById('keyboard1').innerHTML = 'OOPS';
         document.getElementById('keyboard2').innerHTML = 'You Lose';
@@ -166,8 +169,11 @@ function checkIfGameLost() {
 function reset() {
     mistakes = 0;
     guessed = [];
-    win++
-    document.getElementById('hangmanPic').src = './asset/0.png';
+    document.getElementById('win-game').style.display = "none";
+    document.getElementById('gameover').style.display = "none";
+    document.getElementById('game-area').style.display = "block";
+    generateQuestion();
+    document.getElementById('hangman-pic').src = './asset/0.jpg';
     generateQuestion();
     guessedWord();
     updateMistakes();
@@ -177,11 +183,11 @@ function reset() {
 }
 
 function endGame() {
+    let mstSound = new Audio('sound/scream.mp3')
+    mstSound.play()
     document.getElementById('gameover').style.display = "block";
+    document.getElementById('game-area').style.display = "none";
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + playerAnswer;
-    document.getElementById('keyboard1').innerHTML = 'OOPS';
-    document.getElementById('keyboard2').innerHTML = 'You Lose';
-    document.getElementById('keyboard3').innerHTML = 'STUPID!!!';
 }
 
 generateQuestion();

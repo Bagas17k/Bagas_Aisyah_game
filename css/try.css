@@ -1,18 +1,13 @@
 #background-img {
-    background-image: url('../cowboybg.jpg');
+    background-image: url('../images/cowboybg.jpg');
     background-size: contain;
     position: relative;
     height: 100vh;
     background-position: 0 0;
     background-repeat: repeat-x;
-    animation: animate 20s linear infinite;
+    animation: animate 30s linear infinite;
     margin: 0;
-}
-
-.cloud {
-    position: absolute;
-    bottom: 0;
-    top: 0;
+    padding: 0;
 }
 
 @keyframes animate {
@@ -24,12 +19,21 @@
     }
 }
 
-.game-area {
-    margin: 0px 200px 0px 200px;
-    background-color: transparent;
-    opacity: 90%;
+#title-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-color: grey;
+}
+
+#game-area {
+    margin: 20px 200px 0px 200px;
+    background-color: #d47d26;
     border-radius: 30px;
-    /* border: 10px solid #b59231; */
+    opacity: 90%;
 }
 
 .top-area {
@@ -38,8 +42,8 @@
 }
 
 #hangman-pic {
-    background-color: transparent;
-    width: 80%;
+    width: 70%;
+    margin-left: 40px;
 }
 
 h1 {
@@ -56,18 +60,21 @@ hr {
 h3 {
     text-align: center;
     color: white;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 h4 {
     text-align: center;
     color: white;
-    /* font-weight: bold; */
 }
 
 #gameover {
     position: fixed;
     display: none;
-    width: 100%;
+    width: fit-content;
+    background-position-x: center;
     height: 100%;
     top: 0;
     left: 0;
@@ -82,14 +89,35 @@ h4 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
-    width: 50%;
-    opacity: 100%;
+    width: 70%;
+    margin-top: 20px;
+}
+
+#win-game {
+    position: fixed;
+    display: none;
+    background-position-x: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    cursor: pointer;
+}
+
+#win-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    width: 80%;
 }
 
 .btn-keyboard {
-    color: #3b3935;
-    background-color: lightblue;
+    color: white;
+    background-color: #854505;
     padding: 10px 20px 10px 20px;
     margin: 5px;
     border-radius: 10px;
@@ -111,7 +139,10 @@ h4 {
 
 .game-health {
     font-weight: bold;
+    font-size: 20px;
     margin-left: 40px;
+    margin-top: 5px;
+    padding: 0;
     color: white;
 }
 
@@ -123,8 +154,8 @@ h4 {
 }
 
 .btn-option-menu {
-    color: #3b3935;
-    background-color: lightblue;
+    color: white;
+    background-color: #854505;
     border-color: lightgrey;
     box-shadow: transparent;
     padding: 13px 20px 13px 20px;
@@ -132,5 +163,5 @@ h4 {
     margin-right: 15px;
     margin-bottom: 10px;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 10px;
 }
